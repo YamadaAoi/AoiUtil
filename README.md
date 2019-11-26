@@ -42,6 +42,7 @@ parseWindD(220);
 ## 方法介绍：
 
 1、parseWindD(wd: number)
+
 转换 0-360 度为风向，返回一个对象，类型为 WindResp
 
 ```js
@@ -72,7 +73,9 @@ interface WindResp extends WindDirectionType {
 ```
 
 2、download(url: string, fileName?: string):void
+
 下载一文件，url 为文件路径，fileName 为文件名（未必传）
 
 3、downloadTXT(text: string, filename: string): void
+
 下载一段字符串为一个 txt 文件，text 为文件内容，fileName 为文件名
