@@ -41,7 +41,7 @@ parseWindD(220);
 
 ## 方法介绍：
 
-1、parseWindD(wd: number)
+1、parseWindD(wd: number):void
 
 转换 0-360 度为风向，返回一个对象，类型为 WindResp
 
