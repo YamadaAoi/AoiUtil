@@ -23,6 +23,8 @@
     "url": "git+https://github.com/YamadaAoi/AoiUtil.git"
   },
   "keywords": [
+    "download",
+    "parseWindDirection",
     "ts",
     "typescript",
     "tools"
