@@ -1,0 +1,35 @@
+{
+  "name": "aoi-util",
+  "version": "1.0.0",
+  "description": "js tools",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "npm run clean && webpack --config config/webpack.config.js"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.4",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.7.0",
+    "tslint-config-prettier": "^1.18.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "tslint-loader": "^3.5.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YamadaAoi/AoiUtil.git"
+  },
+  "keywords": [
+    "ts",
+    "typescript"
+  ],
+  "author": "zhouyinkui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YamadaAoi/AoiUtil/issues"
+  },
+  "homepage": "https://github.com/YamadaAoi/AoiUtil#readme"
+}

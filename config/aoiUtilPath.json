@@ -1,0 +1,22 @@
+[
+  {
+    "name": "index",
+    "path": "../src/index.ts"
+  },
+  {
+    "name": "aoiUtil",
+    "path": "../src/aoiUtil.ts"
+  },
+  {
+    "name": "download",
+    "path": "../src/download/index.ts"
+  },
+  {
+    "name": "downloadTXT",
+    "path": "../src/downloadTXT/index.ts"
+  },
+  {
+    "name": "parseWindD",
+    "path": "../src/parseWindD/index.ts"
+  }
+]
