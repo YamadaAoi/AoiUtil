@@ -25,6 +25,7 @@
   "keywords": [
     "download",
     "parseWindDirection",
+    "arrayMerge",
     "ts",
     "typescript",
     "tools"

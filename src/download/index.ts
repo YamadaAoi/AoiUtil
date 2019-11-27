@@ -1,1 +1,1 @@
-export { download as aoidownload } from "./download";
+export { download } from "./download";

@@ -1,1 +1,1 @@
-export { parseWindD as aoiparseWindD } from "./parseWindD";
+export { parseWindD } from "./parseWindD";

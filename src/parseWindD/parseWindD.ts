@@ -139,7 +139,7 @@ const WindDirectionList: WindDirectionType[] = [
 
 /**
  * 转换 风向(度)
- * @param wd
+ * @param wd 风向(度)
  */
 export function parseWindD(wd: number): WindResp {
   let ret = WindDirectionList.filter(

@@ -18,5 +18,9 @@
   {
     "name": "parseWindD",
     "path": "../src/parseWindD/index.ts"
+  },
+  {
+    "name": "mergeArray",
+    "path": "../src/mergeArray/index.ts"
   }
 ]

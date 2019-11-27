@@ -1,1 +1,1 @@
-export { downloadTXT as aoidownloadTXT } from "./downloadTXT";
+export { downloadTXT } from "./downloadTXT";
