@@ -34,7 +34,7 @@ parseWindD(220);
 //（暂不支持 babel-plugin-component，因为本集合没有样式文件，而 babel-plugin-component 必须有样式文件）
 {
     "plugins": [
-    ["import", { "libraryName": "aoiu-til", "camel2DashComponentName": false }]
+    ["import", { "libraryName": "aoi-util", "camel2DashComponentName": false }]
   ]
 }
 ```
