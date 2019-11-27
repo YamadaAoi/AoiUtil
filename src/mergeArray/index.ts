@@ -1,2 +1,1 @@
-export { mergeArray } from "./mergeArray";
-export { MapRule } from "./mergeArray";
+export { mergeArray, MapRule, MergeResult } from "./mergeArray";

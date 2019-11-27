@@ -14,7 +14,7 @@ export interface MapRule {
  * errMsg:合并详情描述
  * mergedArr:合并后数组
  */
-interface MergeResult {
+export interface MergeResult {
   code: number;
   errMsg: string;
   mergedArr: any[];
