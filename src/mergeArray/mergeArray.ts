@@ -67,35 +67,33 @@ function mergeData(
   mapRules: MapRule[],
   mergeNull?: boolean
 ) {
-  let data: any = { ...targetObj };
   mapRules.forEach((rule: MapRule) => {
     if (mergeNull) {
-      doMerge(data, obj2merge, rule);
+      doMerge(targetObj, obj2merge, rule);
     } else {
       if (undefined !== obj2merge[rule.from] && null !== obj2merge[rule.from]) {
-        doMerge(data, obj2merge, rule);
+        doMerge(targetObj, obj2merge, rule);
       }
     }
   });
-  return data;
 }
 
 /**
  * 合并数据，根据rule.type区分
- * @param data 被合并数组内对象的镜像
+ * @param targetObj 被合并数组内对象
  * @param obj2merge 合并数组内对象
  * @param rule 合并数据字段映射
  */
-function doMerge(data: any, obj2merge: any, rule: MapRule) {
+function doMerge(targetObj: any, obj2merge: any, rule: MapRule) {
   if (rule.type === "array") {
-    if (data[rule.to] && Array.isArray(data[rule.to])) {
-      data[rule.to].push(obj2merge[rule.from]);
+    if (targetObj[rule.to] && Array.isArray(targetObj[rule.to])) {
+      targetObj[rule.to].push(obj2merge[rule.from]);
     } else {
-      data[rule.to] = [];
-      data[rule.to].push(obj2merge[rule.from]);
+      targetObj[rule.to] = [];
+      targetObj[rule.to].push(obj2merge[rule.from]);
     }
   } else {
-    data[rule.to] = obj2merge[rule.from];
+    targetObj[rule.to] = obj2merge[rule.from];
   }
 }
 
@@ -149,22 +147,19 @@ export function mergeArray(
     return mergedResult;
   }
   targetArr.forEach((val: any) => {
-    let hasMerged: boolean = false;
+    let tempData = { ...val };
     arr2merge.forEach((obj: any) => {
       if (
-        val &&
+        tempData &&
         obj &&
         ((typeof relationRule === "string" &&
-          val[relationRule] === obj[relationRule]) ||
-          (typeof relationRule === "function" && relationRule(val, obj)))
+          tempData[relationRule] === obj[relationRule]) ||
+          (typeof relationRule === "function" && relationRule(tempData, obj)))
       ) {
-        hasMerged = true;
-        mergedResult.mergedArr.push(mergeData(val, obj, mapRules, mergeNull));
+        mergeData(tempData, obj, mapRules, mergeNull);
       }
     });
-    if (!hasMerged) {
-      mergedResult.mergedArr.push({ ...val });
-    }
+    mergedResult.mergedArr.push({ ...tempData });
   });
   return mergedResult;
 }
