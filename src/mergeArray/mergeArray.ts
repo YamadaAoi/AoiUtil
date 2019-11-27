@@ -1,11 +1,15 @@
+declare type Type = "array";
+
 /**
  * 映射关系
  * from:合并数组字段
  * to:被合并数组字段
+ * type:合并行为，默认直接赋值，type="array"时，将数据插入以to字段命名的数组
  */
 export interface MapRule {
   from: string;
   to: string;
+  type?: Type;
 }
 
 /**
@@ -66,14 +70,33 @@ function mergeData(
   let data: any = { ...targetObj };
   mapRules.forEach((rule: MapRule) => {
     if (mergeNull) {
-      data[rule.to] = obj2merge[rule.from];
+      doMerge(data, obj2merge, rule);
     } else {
       if (undefined !== obj2merge[rule.from] && null !== obj2merge[rule.from]) {
-        data[rule.to] = obj2merge[rule.from];
+        doMerge(data, obj2merge, rule);
       }
     }
   });
   return data;
+}
+
+/**
+ * 合并数据，根据rule.type区分
+ * @param data 被合并数组内对象的镜像
+ * @param obj2merge 合并数组内对象
+ * @param rule 合并数据字段映射
+ */
+function doMerge(data: any, obj2merge: any, rule: MapRule) {
+  if (rule.type === "array") {
+    if (data[rule.to] && Array.isArray(data[rule.to])) {
+      data[rule.to].push(obj2merge[rule.from]);
+    } else {
+      data[rule.to] = [];
+      data[rule.to].push(obj2merge[rule.from]);
+    }
+  } else {
+    data[rule.to] = obj2merge[rule.from];
+  }
 }
 
 /**

@@ -96,14 +96,17 @@ interface MergeResult {
     errMsg: string;
     mergedArr: any[];
 }
+declare type Type = "array";
 /**
  * 映射关系
  * from:合并数组字段
  * to:被合并数组字段
+ * type:合并行为，默认直接赋值，type="array"时，将数据插入以to字段命名的数组
  */
 interface MapRule {
     from: string;
     to: string;
+    type?: Type;
 }
 /**
  * 将数据从arr2merge(合并数组)合并到targetArr(被合并数组)
