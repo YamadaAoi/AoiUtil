@@ -1,13 +1,25 @@
 declare type Type = "array";
 
 /**
- * 映射关系
+ * 将合并数组内多个字段包装成一个对象赋值给to
  * from:合并数组字段
+ * rename:重命名
+ * mergeNull:是否合并空数据，包括undefined和null
+ */
+export interface FromObj {
+  from: string;
+  rename?: string;
+  mergeNull?: boolean;
+}
+
+/**
+ * 映射关系
+ * from:合并数组字段或多个字段
  * to:被合并数组字段
  * type:合并行为，默认直接赋值，type="array"时，将数据插入以to字段命名的数组
  */
 export interface MapRule {
-  from: string;
+  from: string | FromObj[];
   to: string;
   type?: Type;
 }
@@ -68,14 +80,56 @@ function mergeData(
   mergeNull?: boolean
 ) {
   mapRules.forEach((rule: MapRule) => {
+    let data: any = generateMergeObj(
+      targetObj,
+      obj2merge,
+      rule.from,
+      rule.to,
+      mergeNull
+    );
+    doMerge(targetObj, data, rule);
+  });
+}
+
+/**
+ * 根据"合并数据字段映射"生成待合并数据
+ * @param targetObj 被合并数组内对象
+ * @param obj2merge 合并数组内对象
+ * @param from 合并数组字段或多个字段
+ * @param to 被合并数组字段
+ * @param mergeNull 是否合并空数据，包括undefined和null
+ */
+function generateMergeObj(
+  targetObj: any,
+  obj2merge: any,
+  from: string | FromObj[],
+  to: string,
+  mergeNull?: boolean
+) {
+  let data: any;
+  if (Array.isArray(from)) {
+    data = {};
+    from.forEach((val: FromObj) => {
+      if (val.mergeNull) {
+        data[val.rename || val.from] = obj2merge[val.from];
+      } else {
+        if (undefined !== obj2merge[val.from] && null !== obj2merge[val.from]) {
+          data[val.rename || val.from] = obj2merge[val.from];
+        }
+      }
+    });
+  } else {
     if (mergeNull) {
-      doMerge(targetObj, obj2merge, rule);
+      data = obj2merge[from];
     } else {
-      if (undefined !== obj2merge[rule.from] && null !== obj2merge[rule.from]) {
-        doMerge(targetObj, obj2merge, rule);
+      if (undefined !== obj2merge[from] && null !== obj2merge[from]) {
+        data = obj2merge[from];
+      } else {
+        data = targetObj[to];
       }
     }
-  });
+  }
+  return data;
 }
 
 /**
@@ -84,16 +138,16 @@ function mergeData(
  * @param obj2merge 合并数组内对象
  * @param rule 合并数据字段映射
  */
-function doMerge(targetObj: any, obj2merge: any, rule: MapRule) {
+function doMerge(targetObj: any, data: any, rule: MapRule) {
   if (rule.type === "array") {
     if (targetObj[rule.to] && Array.isArray(targetObj[rule.to])) {
-      targetObj[rule.to].push(obj2merge[rule.from]);
+      targetObj[rule.to].push(data);
     } else {
       targetObj[rule.to] = [];
-      targetObj[rule.to].push(obj2merge[rule.from]);
+      targetObj[rule.to].push(data);
     }
   } else {
-    targetObj[rule.to] = obj2merge[rule.from];
+    targetObj[rule.to] = data;
   }
 }
 

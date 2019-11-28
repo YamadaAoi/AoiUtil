@@ -98,13 +98,24 @@ interface MergeResult {
 }
 declare type Type = "array";
 /**
- * 映射关系
+ * 将合并数组内多个字段包装成一个对象赋值给to
  * from:合并数组字段
+ * rename:重命名
+ * mergeNull:是否合并空数据，包括undefined和null
+ */
+interface FromObj {
+    from: string;
+    rename?: string;
+    mergeNull?: boolean;
+}
+/**
+ * 映射关系
+ * from:合并数组字段或多个字段
  * to:被合并数组字段
  * type:合并行为，默认直接赋值，type="array"时，将数据插入以to字段命名的数组
  */
 interface MapRule {
-    from: string;
+    from: string | FromObj[];
     to: string;
     type?: Type;
 }
@@ -114,7 +125,7 @@ interface MapRule {
  * @param arr2merge 合并数组
  * @param relationRule 需要进行合并的规则
  * @param mapRules 合并数据字段映射数组
- * @param mergeNull 是否合并空数据，包括undefined和null
+ * @param mergeNull 是否合并空数据，包括undefined和null(仅在MapRule内from字段为字符串时起效)
  */
 function mergeArray(targetArr: any[], arr2merge: any[], relationRule: string | ((targetObj: any, obj2merge: any) => boolean), mapRules: MapRule[], mergeNull?: boolean): MergeResult;
 
