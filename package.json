@@ -28,6 +28,9 @@
     "arrayMerge",
     "ts",
     "typescript",
+    "Elasticsearch",
+    "_bulk",
+    "filter",
     "tools"
   ],
   "author": "zhouyinkui",

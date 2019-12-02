@@ -15,7 +15,7 @@ $ npm i aoi-util -D
 2、使用
 
 ```js
-import * as AoiUtil from "aoi-util";
+import AoiUtil from "aoi-util";
 
 AoiUtil.parseWindD(220);
 ```
@@ -163,4 +163,123 @@ mergeArray(
   },
   [{ from: 'alias', to: 'name' }]
 );
+
+/***** 更复杂一些 *****/
+// 如果要将合并数组的多个字段包装成一个对象，合并到被合并数组的to字段中去
+// 且以to字段是一个数组
+mergeArray(
+  targetArr,
+  arr2merge,
+  (obj1: any, obj2: any) => {
+    if (
+      obj1.id === obj2.id &&
+      obj1.time === obj2.time
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  [
+    {
+      from: [
+        { from: 'unit' },
+        { from: 'type' },
+        { from: 'level' },
+        { from: 'time' }
+      ],
+      to: 'content',
+      type: 'array',
+    },
+  ]
+);
+```
+
+5、esBatch(datasList: any[], editOnly?: boolean, index?: string, type?: string): string;
+Elasticsearch 批量操作，此方法仅包含新增和修改
+新增和修改，以\_id 是否存在作为依据，datasList 中\_id 存在，则修改，不存在，则新增
+index?: string, type?: string 可以不传，但不传要保证 datasList 中每一项内均同时存在\_index 和\_type
+
+```js
+//传递给esBatch的数组最好先做处理，只把需要修改或新增的数据传进来
+/**
+ * 生成 Elasticsearch 批量操作_bulk所需入参
+ * @param datasList 数据数组[{_id:"",_type:"",_index:"",...}]
+ * @param editOnly 仅进行批量修改
+ * @param index 表的_index
+ * @param type 表的_type
+ */
+/**
+ *得到的批量请求如下：
+  {"update":{"_id":"AgV5tG4BWxRaqJcGopQK","_index":"meteo_surface_all_idx","_type":"MeteoSurfaceAll"}}
+  {"doc":{"station":"xxxx","time":"2019-11-29 08:00:00","windSpeed10mAvg":1.6,"rhu":59,"rhuMin":59}}
+  {"index":{"_index":"meteo_surface_all_idx","_type":"MeteoSurfaceAll"}}
+  {"station":"xxxx","time":"2019-11-29 08:00:00","windSpeed10mAvg":1,"tempMax":2}
+
+ */
+```
+
+6、getFilteredList(dataList: any[], matchRule: MatchRule): any[];
+按照一定规则返回过滤后的数组，matchRule 可以是一个入参为数组遍历项返回为 boolean 的方法，
+也可以是一个键值对数组，getFilteredList 方法会遍历简直对数组比较每一条数据
+
+```js
+interface KeyValue {
+    key: string;
+    value: any;
+}
+/**
+ * 匹配规则
+ */
+declare type MatchRule = KeyValue[] | ((obj: any) => boolean);
+/**
+ * 根据过滤条件返回匹配的数据
+ * @param dataList 要过滤的数组
+ * @param matchRule 匹配规则
+ */
+function getFilteredList(dataList: any[], matchRule: MatchRule): any[];
+
+// 例子
+getFilteredList([{...}], [{ key: 'station', value: "beijing" },{ key: 'time', value: "2019-11-29 08:00:00" }])
+or
+getFilteredList([{...}], (val:any)=>{
+  if ("beijing" === val.station && "2019-11-29 08:00:00" === val.time) {
+    return true;
+  }else{
+    return false;
+  }
+})
+```
+
+7、generateESEditList(editList: any[], editInfo: KeyValue, originDataList: any[], matchRule: KeyValue[], addNewData?: boolean): void;
+主要用于前端直接操作 Elasticsearch 时，需要修改数据再保存，暂存所有修改
+记录每次修改到 editList 中
+matchRule：是匹配条件的键值对，在生成的每条记录中，也会将 matchRule 中的所有项展开到记录中（用于之后编辑匹配）
+addNewData：在缺少记录的情况下编辑，是否保存其修改
+特别的，若匹配到的原始数据内存在\_id，方法会主动将其存入编辑数组
+
+```js
+/**
+ * 保存修改记录为数组
+ * @param editList 所有编辑过数据的数组
+ * @param editInfo 此次编辑数据的键值对
+ * @param originDataList 原始数据的数组[{_id:"",_type:"",_index:"",...}]，请将_source中的数据展开
+ * @param matchRule 匹配规则
+ * @param addNewData 若原始数据中没有此条记录。是否添加
+ */
+function generateESEditList(editList: any[], editInfo: KeyValue, originDataList: any[], matchRule: KeyValue[], addNewData?: boolean): void;
+// 例子：
+      generateESEditList(
+        editList,
+        { key: "rhu", value: 59 },
+        originData,
+        [
+          { key: 'station', value: "xxxx" },
+          { key: 'time', value: "2019-11-29 08:00:00" },
+        ],
+        true
+      );
+      console.log(editList);
+      ---------------------------------------------------------------------------------------
+      [{"station":"xxxx","time":"2019-11-29 08:00:00","_id":"AgV5tG4BWxRaqJcGopQK","rhu":59}]
 ```

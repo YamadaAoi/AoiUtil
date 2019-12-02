@@ -22,5 +22,17 @@
   {
     "name": "mergeArray",
     "path": "../src/mergeArray/index.ts"
+  },
+  {
+    "name": "esBatch",
+    "path": "../src/esBatch/index.ts"
+  },
+  {
+    "name": "getFilteredList",
+    "path": "../src/getFilteredList/getFilteredList.ts"
+  },
+  {
+    "name": "generateESEditList",
+    "path": "../src/generateESEditList/generateESEditList.ts"
   }
 ]
