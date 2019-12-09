@@ -5,7 +5,9 @@
     "module": "commonjs",
     "target": "es5",
     "declaration": true,
-    "strict": true
+    "strict": true,
+    "downlevelIteration": true,
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "exclude": ["node_modules", "config", "lib"],
   "include": ["src/**/*"]

@@ -283,3 +283,20 @@ function generateESEditList(editList: any[], editInfo: KeyValue, originDataList:
       ---------------------------------------------------------------------------------------
       [{"station":"xxxx","time":"2019-11-29 08:00:00","_id":"AgV5tG4BWxRaqJcGopQK","rhu":59}]
 ```
+
+8、getHours(hourRangeList: HourRange[]): number[];
+
+```js
+/**
+ * 时间段，从from到to,from <= to
+ */
+interface HourRange {
+    from: number;
+    to: number;
+}
+/**
+ * 返回所有时间段内小时值的并集(0-23):[{from:0,to:6},{from:8,to:9},]-->[0,1,2,3,4,5,6,8,9]
+ * @param hourRangeList 时间范围数组
+ */
+getHours(hourRangeList: HourRange[]): number[];
+```

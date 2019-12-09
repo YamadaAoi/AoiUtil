@@ -8,15 +8,23 @@
     "clean": "rimraf lib",
     "build": "npm run clean && webpack --config config/webpack.config.js"
   },
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.7.4"
+  },
   "devDependencies": {
-    "typescript": "^3.6.4",
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-loader": "^8.0.6",
     "rimraf": "^3.0.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.7.0",
     "tslint-config-prettier": "^1.18.0",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^3.6.4",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "tslint-loader": "^3.5.4"
+    "webpack-cli": "^3.3.10"
   },
   "repository": {
     "type": "git",

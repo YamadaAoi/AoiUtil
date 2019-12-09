@@ -10,6 +10,7 @@ import {
   judgeMatch,
 } from "./getFilteredList";
 import { generateESEditList } from "./generateESEditList";
+import { getHours, HourRange } from "./getHours";
 
 export {
   parseWindD,
@@ -25,4 +26,6 @@ export {
   getFilteredList,
   judgeMatch,
   generateESEditList,
+  getHours,
+  HourRange,
 };

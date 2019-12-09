@@ -24,6 +24,9 @@ module.exports = {
         include: path.join(__dirname, "../src"),
         use: [
           {
+            loader: "babel-loader",
+          },
+          {
             loader: "ts-loader",
             options: {
               configFile: path.resolve(__dirname, "../tsconfig.json"),
