@@ -295,7 +295,7 @@ interface HourRange {
     to: number;
 }
 /**
- * 返回所有时间段内小时值的并集(0-23):[{from:0,to:6},{from:8,to:9},]-->[0,1,2,3,4,5,6,8,9]
+ * 返回所有时间段内小时值的并集(0-24):[{from:0,to:6},{from:8,to:9},]-->[0,1,2,3,4,5,6,8,9]
  * @param hourRangeList 时间范围数组
  */
 getHours(hourRangeList: HourRange[]): number[];

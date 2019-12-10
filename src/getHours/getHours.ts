@@ -7,7 +7,7 @@ export interface HourRange {
 }
 
 /**
- * 返回所有时间段内小时值的并集(0-23):[{from:0,to:6},{from:8,to:9},]-->[0,1,2,3,4,5,6,8,9]
+ * 返回所有时间段内小时值的并集(0-24):[{from:0,to:6},{from:8,to:9},]-->[0,1,2,3,4,5,6,8,9]
  * @param hourRangeList 时间范围数组
  */
 export function getHours(hourRangeList: HourRange[]) {
@@ -34,7 +34,7 @@ export function getHours(hourRangeList: HourRange[]) {
  * @param val 时间值
  */
 function hourCheck(val: any) {
-  return typeof val === "number" && !isNaN(val) && val >= 0 && val <= 23;
+  return typeof val === "number" && !isNaN(val) && val >= 0 && val <= 24;
 }
 
 /**
