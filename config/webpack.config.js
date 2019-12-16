@@ -11,6 +11,7 @@ module.exports = {
   entry,
   output: {
     filename: "[name].js",
+    library: "aoi-util",
     libraryTarget: "umd",
     path: path.join(__dirname, "../lib"),
   },

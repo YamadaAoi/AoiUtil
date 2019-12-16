@@ -300,3 +300,28 @@ interface HourRange {
  */
 getHours(hourRangeList: HourRange[]): number[];
 ```
+
+9、addEvent(element: any, type: string, handler: any): void;
+拾人牙慧，但是又时不时会用到，补充一下
+
+```js
+/**
+ * dom元素监听事件（在事件冒泡阶段执行）
+ * @param element dom元素
+ * @param type 事件类型
+ * @param handler 需要执行的方法
+ */
+function addEvent(element: any, type: string, handler: any): void;
+```
+
+10、removeEvent(element: any, type: string, handler: any): void;
+
+```js
+/**
+ * 移除dom元素监听事件
+ * @param element dom元素
+ * @param type 事件类型
+ * @param handler 需要执行的方法
+ */
+function removeEvent(element: any, type: string, handler: any): void;
+```

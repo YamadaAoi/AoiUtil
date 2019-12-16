@@ -34,5 +34,13 @@
   {
     "name": "getHours",
     "path": "../src/getHours/index.ts"
+  },
+  {
+    "name": "addEvent",
+    "path": "../src/addEvent/index.ts"
+  },
+  {
+    "name": "removeEvent",
+    "path": "../src/removeEvent/index.ts"
   }
 ]
