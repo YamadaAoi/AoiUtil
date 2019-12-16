@@ -1,4 +1,5 @@
-import { KeyValue, getFilteredList, judgeMatch } from "../getFilteredList";
+import { KeyValue, judgeMatch } from "../getFilteredList";
+import getFilteredList from "../getFilteredList";
 
 /**
  * 保存修改记录为数组
@@ -8,7 +9,7 @@ import { KeyValue, getFilteredList, judgeMatch } from "../getFilteredList";
  * @param matchRule 匹配规则
  * @param addNewData 若原始数据中没有此条记录。是否添加
  */
-export function generateESEditList(
+export default function generateESEditList(
   editList: any[],
   editInfo: KeyValue,
   originDataList: any[],

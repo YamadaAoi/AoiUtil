@@ -141,7 +141,7 @@ const WindDirectionList: WindDirectionType[] = [
  * 转换 风向(度)
  * @param wd 风向(度)
  */
-export function parseWindD(wd: number): WindResp {
+export default function parseWindD(wd: number): WindResp {
   let ret = WindDirectionList.filter(
     item => Math.abs(item.centerDegree - wd) <= WD_THRESHOLD
   );

@@ -3,7 +3,7 @@
  * @param filename 文件名
  * @param text 文本内容
  */
-export function downloadTXT(text: string, filename: string) {
+export default function downloadTXT(text: string, filename: string) {
   let element = document.createElement("a");
   element.setAttribute(
     "href",

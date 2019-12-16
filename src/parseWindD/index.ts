@@ -1,1 +1,2 @@
-export { parseWindD } from "./parseWindD";
+import parseWindD from "./parseWindD";
+export default parseWindD;

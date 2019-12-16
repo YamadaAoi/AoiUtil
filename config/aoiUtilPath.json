@@ -4,10 +4,6 @@
     "path": "../src/index.ts"
   },
   {
-    "name": "aoiUtil",
-    "path": "../src/aoiUtil.ts"
-  },
-  {
     "name": "download",
     "path": "../src/download/index.ts"
   },
@@ -29,14 +25,14 @@
   },
   {
     "name": "getFilteredList",
-    "path": "../src/getFilteredList/getFilteredList.ts"
+    "path": "../src/getFilteredList/index.ts"
   },
   {
     "name": "generateESEditList",
-    "path": "../src/generateESEditList/generateESEditList.ts"
+    "path": "../src/generateESEditList/index.ts"
   },
   {
     "name": "getHours",
-    "path": "../src/getHours/getHours.ts"
+    "path": "../src/getHours/index.ts"
   }
 ]

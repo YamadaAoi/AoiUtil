@@ -13,7 +13,7 @@ export declare type MatchRule = KeyValue[] | ((obj: any) => boolean);
  * @param dataList 要过滤的数组
  * @param matchRule 匹配规则
  */
-export function getFilteredList(dataList: any[], matchRule: MatchRule) {
+export default function getFilteredList(dataList: any[], matchRule: MatchRule) {
   let filteredList: any[] = [];
   if (dataList && Array.isArray(dataList) && dataList.length > 0) {
     filteredList = dataList.filter((val: any) => {

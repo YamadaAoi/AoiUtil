@@ -159,7 +159,7 @@ function doMerge(targetObj: any, data: any, rule: MapRule) {
  * @param mapRules 合并数据字段映射数组
  * @param mergeNull 是否合并空数据，包括undefined和null
  */
-export function mergeArray(
+export default function mergeArray(
   targetArr: any[],
   arr2merge: any[],
   relationRule: string | ((targetObj: any, obj2merge: any) => boolean),

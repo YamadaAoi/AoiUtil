@@ -17,7 +17,7 @@ function isNull(data: any) {
  * @param index 表的_index
  * @param type 表的_type
  */
-export function esBatch(
+export default function esBatch(
   datasList: any[],
   editOnly?: boolean,
   index?: string,

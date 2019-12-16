@@ -1,1 +1,2 @@
-export { downloadTXT } from "./downloadTXT";
+import downloadTXT from "./downloadTXT";
+export default downloadTXT;

@@ -3,7 +3,7 @@
  * @param url 路径
  * @param fileName 文件名
  */
-export function download(url: string, fileName?: string) {
+export default function download(url: string, fileName?: string) {
   let element = document.createElement("a");
   element.setAttribute("href", url);
   element.setAttribute("target", "_blank");

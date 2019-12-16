@@ -1,1 +1,2 @@
-export { generateESEditList } from "./generateESEditList";
+import generateESEditList from "./generateESEditList";
+export default generateESEditList;

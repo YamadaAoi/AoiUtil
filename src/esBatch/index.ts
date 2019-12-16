@@ -1,1 +1,2 @@
-export { esBatch } from "./esBatch";
+import esBatch from "./esBatch";
+export default esBatch;
